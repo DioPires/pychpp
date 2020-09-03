@@ -12,7 +12,13 @@ before_script:
 
 stages:
   - test
+  - deploy
 
 test:
   stage: test
   script: poetry run pytest
+
+deploy:
+  stage: deploy
+  only: [master]
+  script: poetry publish --build -u $PYCHPP_PYPI_USERNAME -p $PYCHPP_PYPI_PASSWORD

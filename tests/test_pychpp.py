@@ -34,6 +34,8 @@ USER_PATTERN = r"https://www.hattrick.org/goto.ashx\?path=/Club/Manager/\?userId
 REGION_PATTERN = r"https://www.hattrick.org/goto.ashx\?path=/World/Regions/Region.aspx\?RegionID=(\d+)"
 MATCH_ARCHIVE_PATTERN = r"https://www.hattrick.org/goto.ashx\?path=%2FClub%2FMatches%2FArchive.aspx%3F(TeamID%3D(\d*))?(%26)?(season%3D(\d*))?"
 MATCH_PATTERN = r"https://www.hattrick.org/goto.ashx\?path=/Club/Matches/Match.aspx\?matchID=(\d+)"
+COUNTRY_LEAGUE_PATTERN = r"https://www.hattrick.org/goto.ashx\?path=/World/Leagues/League.aspx\?LeagueID=(\d+)"
+CUP_PATTERN = r"https://www.hattrick.org/goto.ashx\?path=/World/Cup/Cup.aspx\?CupID=(\d+)"
 
 
 def test_version():
@@ -408,3 +410,7 @@ def test_get_world_details(chpp):
 
     assert len(world_details.leagues) > 1
     assert world_details.leagues[0].country.regions is None
+
+    assert re.match(COUNTRY_LEAGUE_PATTERN, portugal_details.league_from_id(25).url)
+    assert re.match(REGION_PATTERN, portugal_regions[0].url)
+    assert re.match(CUP_PATTERN, portugal_details.league_from_id(25).cups[0].url)

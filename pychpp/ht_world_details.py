@@ -64,6 +64,8 @@ class HTCountryLeague(ht_model.HTModel):
     Hattrick country league
     """
 
+    _URL_PATH = "/World/Leagues/League.aspx?LeagueID="
+
     _ht_attributes = [("ht_id", ".//LeagueID", ht_xml.HTXml.ht_int,),
                       ("league_name", ".//LeagueName", ht_xml.HTXml.ht_str,),
                       ("season", ".//Season", ht_xml.HTXml.ht_int,),
@@ -145,6 +147,8 @@ class HTCup(ht_model.HTModel):
     """
     Hattrick country cup
     """
+
+    _URL_PATH = "/World/Cup/Cup.aspx?CupID="
 
     _ht_attributes = [("ht_id", ".//CupID", ht_xml.HTXml.ht_int,),
                       ("cup_name", ".//CupName", ht_xml.HTXml.ht_str,),

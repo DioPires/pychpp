@@ -17,8 +17,10 @@ class HTWorldDetails(ht_model.HTModel):
         Initialization of a HTWorldDetails instance
 
         :param league_id: Hattrick ID of league
+        :param include_regios: Boolean to indicate if regions need to be fetched for the countries
         :param source: hattrick source to request ('hattrick', 'youth' or 'hto')
         :type league_id: int
+        :type include_regions: bool
         :type source: str
         :key chpp: CHPP instance of connected user, must be a chpp.CHPP object
         """

@@ -89,7 +89,7 @@ The following table shows the relationships between pyCHPP classes and CHPP XML 
 |HTRegion|`regiondetails.xml`|
 |HTTeam|`teamdetails.xml`|
 |HTUser|`managercompendium.xml`|
-|HTWorldDetails|`worlddetails.xml`|
+|HTWorld|`worlddetails.xml`|
 |HTYouthPlayer|`youthplayerdetails.xml`|
 |HTYouthTeam|`youthteamdetails.xml`|
 

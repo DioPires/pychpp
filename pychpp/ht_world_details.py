@@ -2,7 +2,7 @@ from pychpp import ht_model
 from pychpp import ht_arena, ht_error, ht_match, ht_player, ht_region, ht_team, ht_xml
 
 
-class HTWorldDetails(ht_model.HTModel):
+class HTWorld(ht_model.HTModel):
     """
     Hattrick world details
     """
@@ -14,7 +14,7 @@ class HTWorldDetails(ht_model.HTModel):
 
     def __init__(self, league_id=None, include_regions=False, source="hattrick", **kwargs):
         """
-        Initialization of a HTWorldDetails instance
+        Initialization of a HTWorld instance
 
         :param league_id: Hattrick ID of league
         :param include_regions: Boolean to indicate if regions need to be fetched for the countries

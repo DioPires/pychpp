@@ -357,12 +357,12 @@ class CHPP:
         """
         return ht_match_lineup.HTMatchLineup(chpp=self, **kwargs)
 
-    def world_details(self, **kwargs):
+    def world(self, **kwargs):
         """
         Get a world details
 
         :key league_id: Hattrick ID of the requested country league, must be an int (optional)
         :key include_regions: Whether or not to include regions for the countries, must be an bool (optional, default=False)
-        :rtype: ht_world_details.HTWorldDetails
+        :rtype: ht_world_details.HTWorld
         """
-        return ht_world_details.HTWorldDetails(chpp=self, **kwargs)
+        return ht_world_details.HTWorld(chpp=self, **kwargs)

@@ -17,7 +17,7 @@ from pychpp.ht_skill import HTSkill, HTSkillYouth
 from pychpp.ht_challenge import HTChallengeManager
 from pychpp.ht_league import HTLeague
 from pychpp.ht_rank import HTRank
-from pychpp.ht_world_details import HTWorld, HTCountryLeague, HTCountry, HTCup
+from pychpp.ht_world_details import HTCountry, HTCup, HTCountryLeague, HTRegionItem, HTWorld
 from pychpp.ht_error import HTUnauthorizedAction, UnknownLeagueError
 
 PYCHPP_CONSUMER_KEY = os.environ["PYCHPP_CONSUMER_KEY"]
@@ -400,7 +400,8 @@ def test_get_world_details(chpp):
 
     portugal_regions = portugal_details.league(ht_id=25).country.regions
     assert len(portugal_regions) >= 1
-    assert isinstance(portugal_regions[0], HTRegion)
+    assert isinstance(portugal_regions[0], HTRegionItem)
+    assert isinstance(portugal_regions[0].region, HTRegion)
     assert len(portugal_details.league(ht_id=25).cups) >= 1
 
     with pytest.raises(UnknownLeagueError):
@@ -412,5 +413,5 @@ def test_get_world_details(chpp):
     assert world_details.leagues[0].country.regions is None
 
     assert re.match(COUNTRY_LEAGUE_PATTERN, portugal_details.league(ht_id=25).url)
-    assert re.match(REGION_PATTERN, portugal_regions[0].url)
+    assert re.match(REGION_PATTERN, portugal_regions[0].region.url)
     assert re.match(CUP_PATTERN, portugal_details.league(ht_id=25).cups[0].url)

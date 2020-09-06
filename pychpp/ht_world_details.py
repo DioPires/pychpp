@@ -142,8 +142,14 @@ class HTCountry(ht_model.HTModel):
     @property
     def regions(self):
         if self._data.find("RegionList") is not None:
-            return [ht_region.HTRegion(chpp=self._chpp, ht_id=p_data.find("RegionID").text)
-                    for p_data in self._data.find("RegionList").findall("Region")]
+            return [
+                HTRegionItem(
+                    chpp=self._chpp,
+                    ht_id=p_data.find("RegionID").text,
+                    name=p_data.find("RegionName").text
+                )
+                for p_data in self._data.find("RegionList").findall("Region")
+            ]
 
 
 class HTCup(ht_model.HTModel):
@@ -202,3 +208,31 @@ class HTCup(ht_model.HTModel):
                 return "Ruby"
             else:
                 return "Sapphire"
+
+
+class HTRegionItem:
+    """
+    Hattrick country region item
+    """
+
+    def __init__(self, chpp, ht_id, name, **kwargs):
+        """
+        Initialize HTRegionItem instance
+
+        :key chpp: CHPP instance of connected user
+        :key ht_id: Hattrick ID of the region
+        :key name: Hattrick name of the region
+        :type chpp: CHPP
+        :type ht_id: int
+        :type name: str
+        """
+        self.chpp = chpp
+        self.ht_id = ht_id
+        self.name = name
+
+    def __repr__(self):
+        return f"<{self.__class__.__name__} object : {self.name} ({self.ht_id})>"
+
+    @property
+    def region(self):
+        return ht_region.HTRegion(chpp=self.chpp, ht_id=self.ht_id)

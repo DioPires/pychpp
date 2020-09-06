@@ -46,17 +46,20 @@ class HTWorld(ht_model.HTModel):
         return [HTCountryLeague(chpp=self._chpp, data=p_data)
                 for p_data in self._data.find("LeagueList").findall("League")]
 
-    def league_from_name(self, league_name):
-        try:
-            return list(filter(lambda k: k.english_name.lower() == league_name.lower(), self.leagues))[0]
-        except IndexError:
-            raise ht_error.UnknownLeagueError(f"League with name={league_name} does not exist")
+    def league(self, ht_id=None, name=None):
+        if ht_id is None and name is None:
+            raise ValueError("ht_id or name must be set")
 
-    def league_from_id(self, league_id):
-        try:
-            return list(filter(lambda k: k.ht_id == league_id, self.leagues))[0]
-        except IndexError:
-            raise ht_error.UnknownLeagueError(f"League with ID={league_id} does not exist")
+        if ht_id is not None:
+            try:
+                return list(filter(lambda k: k.ht_id == ht_id, self.leagues))[0]
+            except IndexError:
+                raise ht_error.UnknownLeagueError(f"League with ID={ht_id} does not exist")
+        else:
+            try:
+                return list(filter(lambda k: k.english_name.lower() == name.lower(), self.leagues))[0]
+            except IndexError:
+                raise ht_error.UnknownLeagueError(f"League with name={name} does not exist")
 
 
 class HTCountryLeague(ht_model.HTModel):

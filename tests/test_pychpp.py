@@ -394,23 +394,23 @@ def test_get_world_details(chpp):
     assert isinstance(portugal_details.leagues[0].cups[0], HTCup)
 
     assert len(portugal_details.leagues) == 1
-    assert portugal_details.league_from_id(25).league_name == "Portugal"
-    assert portugal_details.league_from_name("portugal").ht_id == 25
-    assert portugal_details.league_from_id(25).country.country_name == "Portugal"
+    assert portugal_details.league(ht_id=25).league_name == "Portugal"
+    assert portugal_details.league(name="portugal").ht_id == 25
+    assert portugal_details.league(ht_id=25).country.country_name == "Portugal"
 
-    portugal_regions = portugal_details.league_from_id(25).country.regions
+    portugal_regions = portugal_details.league(ht_id=25).country.regions
     assert len(portugal_regions) >= 1
     assert isinstance(portugal_regions[0], HTRegion)
-    assert len(portugal_details.league_from_id(25).cups) >= 1
+    assert len(portugal_details.league(ht_id=25).cups) >= 1
 
     with pytest.raises(UnknownLeagueError):
-        portugal_details.league_from_id(26)
+        portugal_details.league(ht_id=26)
 
     world_details = chpp.world()
 
     assert len(world_details.leagues) > 1
     assert world_details.leagues[0].country.regions is None
 
-    assert re.match(COUNTRY_LEAGUE_PATTERN, portugal_details.league_from_id(25).url)
+    assert re.match(COUNTRY_LEAGUE_PATTERN, portugal_details.league(ht_id=25).url)
     assert re.match(REGION_PATTERN, portugal_regions[0].url)
-    assert re.match(CUP_PATTERN, portugal_details.league_from_id(25).cups[0].url)
+    assert re.match(CUP_PATTERN, portugal_details.league(ht_id=25).cups[0].url)

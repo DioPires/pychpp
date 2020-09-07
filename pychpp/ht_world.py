@@ -12,27 +12,27 @@ class HTWorld(ht_model.HTModel):
 
     _ht_attributes = []
 
-    def __init__(self, league_id=None, include_regions=False, source="hattrick", **kwargs):
+    def __init__(self, ht_id=None, include_regions=False, source="hattrick", **kwargs):
         """
         Initialization of a HTWorld instance
 
-        :param league_id: Hattrick ID of league
+        :param ht_id: Hattrick ID of league
         :param include_regions: Boolean to indicate if regions need to be fetched for the countries
         :param source: hattrick source to request ('hattrick', 'youth' or 'hto')
-        :type league_id: int
+        :type ht_id: int
         :type include_regions: bool
         :type source: str
         :key chpp: CHPP instance of connected user, must be a chpp.CHPP object
         """
-        if league_id is not None and not isinstance(league_id, int):
-            raise ValueError("league_id must be an integer")
+        if ht_id is not None and not isinstance(ht_id, int):
+            raise ValueError("ht_id must be an integer")
         elif source not in ("hattrick", "youth", "htointegrated"):
             raise ValueError("source must be equal to 'hattrick, 'youth' or 'htointegrated'")
 
         self._REQUEST_ARGS = dict()
-        if league_id is not None:
-            self.league_id = league_id
-            self._REQUEST_ARGS["leagueID"] = str(league_id)
+        if ht_id is not None:
+            self.ht_id = ht_id
+            self._REQUEST_ARGS["leagueID"] = str(ht_id)
         self._REQUEST_ARGS["includeRegions"] = include_regions
         self._REQUEST_ARGS["sourceSystem"] = source
 
